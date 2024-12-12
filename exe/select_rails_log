@@ -1,0 +1,3 @@
+#!/usr/bin/env ruby
+
+require "select_rails_log"
