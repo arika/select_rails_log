@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description = "select Rails log"
   spec.homepage = "https://github.com/arika/select_rails_log"
   spec.license = "MIT"
-  spec.required_ruby_version = ">= 3.0.0"
+  spec.required_ruby_version = ">= 3.1.0"
 
   spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
 
@@ -34,6 +34,7 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "json"
-  spec.add_dependency "optparse"
+  spec.add_dependency "csv"
+  spec.add_dependency "enumerable-statistics"
+  spec.add_dependency "unicode_plot"
 end

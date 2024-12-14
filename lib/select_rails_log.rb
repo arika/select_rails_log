@@ -1,48 +1,57 @@
 # frozen_string_literal: true
 
-require_relative "select_rails_log/version"
-require_relative "select_rails_log/index"
+require_relative "select_rails_log/constants"
+require_relative "select_rails_log/command_line_options"
+require_relative "select_rails_log/extension"
 require_relative "select_rails_log/filter"
-require_relative "select_rails_log/selector"
 require_relative "select_rails_log/printer"
-require_relative "select_rails_log/command_line_option"
+require_relative "select_rails_log/selector"
+require_relative "select_rails_log/runner"
+require_relative "select_rails_log/scanner"
+require_relative "select_rails_log/version"
 
 module SelectRailsLog
+  class Error < RuntimeError; end
+  class CommandLineOptionError < Error; end
+
   class << self
     def run
-      count = 0
-      counter = lambda do
-        loop do
-          sleep 1
-          print "\r#{count}"
-        end
-      ensure
-        puts "\r#{count}"
-      end
-
       begin
-        selector = Selector.new
-        printer = Printer.new
-        options = CommandLineOption.parse(selector: selector, printer: printer)
-        index = Index.new(ARGF)
-
-        counter_th = Thread.new { counter.call } if $stdout.tty? && printer.output_directory
-
-        index.select(selector) do |data|
-          count += 1
-          printer.print(data)
-        end
-      rescue Errno::EPIPE, Interrupt
+        runner = setup_runner(ARGV)
+        runner.run(Scanner.new(ARGF)) if runner&.runnable?
+      rescue StopIteration, Errno::EPIPE, Interrupt
         # noop
       rescue StandardError => e
-        raise if options&.debug
+        raise e if runner&.debug?
 
-        abort e.message
-      ensure
-        counter_th&.kill
+        warn e.message
       end
 
-      exit(count.zero? ? 1 : 0)
+      exit(runner&.success? ? 0 : 1)
+    end
+
+    private
+
+    def setup_runner(argv)
+      options = CommandLineOptions.new
+      options.parse!(argv)
+
+      runner = Runner.new(options)
+      if runner.help?
+        puts options.parser
+      elsif runner.version?
+        print_version
+      end
+
+      runner
+    end
+
+    def print_version
+      puts "select_rails_log #{VERSION}"
+      puts " - csv #{CSV::VERSION}"
+      puts " - enumerable-statistics #{EnumerableStatistics::VERSION}"
+      puts " - unicode_plot #{UnicodePlot::VERSION}"
+      puts " - #{RUBY_ENGINE} #{RUBY_VERSION} [#{RUBY_PLATFORM}]"
     end
   end
 end
