@@ -16,42 +16,7 @@ module SelectRailsLog
 
   class << self
     def run
-      begin
-        runner = setup_runner(ARGV)
-        runner.run(Scanner.new(ARGF)) if runner&.runnable?
-      rescue StopIteration, Errno::EPIPE, Interrupt
-        # noop
-      rescue StandardError => e
-        raise e if runner&.debug?
-
-        warn e.message
-      end
-
-      exit(runner&.success? ? 0 : 1)
-    end
-
-    private
-
-    def setup_runner(argv)
-      options = CommandLineOptions.new
-      options.parse!(argv)
-
-      runner = Runner.new(options)
-      if runner.help?
-        puts options.parser
-      elsif runner.version?
-        print_version
-      end
-
-      runner
-    end
-
-    def print_version
-      puts "select_rails_log #{VERSION}"
-      puts " - csv #{CSV::VERSION}"
-      puts " - enumerable-statistics #{EnumerableStatistics::VERSION}"
-      puts " - unicode_plot #{UnicodePlot::VERSION}"
-      puts " - #{RUBY_ENGINE} #{RUBY_VERSION} [#{RUBY_PLATFORM}]"
+      exit(Runner.run(ARGV, ARGF) ? 0 : 1)
     end
   end
 end

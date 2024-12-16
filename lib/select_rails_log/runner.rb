@@ -13,6 +13,49 @@ module SelectRailsLog
       option :debug, "--debug", "Enable debug print"
     end
 
+    class << self
+      def run(argv, argf)
+        runner = setup_runner(argv)
+
+        begin
+          runner.run(Scanner.new(argf)) if runner.runnable?
+        rescue StopIteration, Errno::EPIPE, Interrupt
+          # noop
+        end
+
+        runner.success?
+      rescue StandardError => e
+        raise e if runner&.debug?
+
+        warn e.message
+        false
+      end
+
+      private
+
+      def setup_runner(argv)
+        options = CommandLineOptions.new
+        options.parse!(argv)
+
+        runner = Runner.new(options)
+        if runner.help?
+          puts options.parser
+        elsif runner.version?
+          print_version
+        end
+
+        runner
+      end
+
+      def print_version
+        puts "select_rails_log #{VERSION}"
+        puts " - csv #{CSV::VERSION}"
+        puts " - enumerable-statistics #{EnumerableStatistics::VERSION}"
+        puts " - unicode_plot #{UnicodePlot::VERSION}"
+        puts " - #{RUBY_ENGINE} #{RUBY_VERSION} [#{RUBY_PLATFORM}]"
+      end
+    end
+
     def initialize(...)
       super
       @count = 0
