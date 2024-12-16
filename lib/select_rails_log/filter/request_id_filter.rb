@@ -15,7 +15,7 @@ module SelectRailsLog
       end
 
       def runnable?
-        @request_ids&.any?
+        !!@request_ids&.any?
       end
 
       def run(data)

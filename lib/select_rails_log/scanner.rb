@@ -12,7 +12,8 @@ module SelectRailsLog
     DEBUG = "DEBUG"
 
     DATETIME_FORMAT = "%FT%T.%N"
-    private_constant :DATETIME_FORMAT
+    REQUEST_FILTER_APPLIED = "request_filter_applied" # internal data keys
+    private_constant :DATETIME_FORMAT, :DEBUG, :REQUEST_FILTER_APPLIED
 
     def initialize(io)
       @io = io
@@ -63,7 +64,8 @@ module SelectRailsLog
             PATH => path,
             CLIENT => client,
             LOGS => [log],
-            RAW_LOGS => [line]
+            RAW_LOGS => [line],
+            REQUEST_FILTER_APPLIED => false
           }
           buff[ident] = data
           next
@@ -80,7 +82,11 @@ module SelectRailsLog
           data[LOGS] << log
           data[RAW_LOGS] << line
 
-          buff.delete(ident) unless selector.run_request_filters(data)
+          data.delete(REQUEST_FILTER_APPLIED)
+          unless selector.run_request_filters(data)
+            buff.delete(ident)
+            prev_data = nil
+          end
         elsif /\A  Parameters: (?<params>.*)/ =~ message
           data[PARAMETERS] = params
           data[LOGS] << log
@@ -94,7 +100,14 @@ module SelectRailsLog
           data[LOGS] << log
           data[RAW_LOGS] << line
 
-          selector.run_line_filters(data) do |i|
+          if data.key?(REQUEST_FILTER_APPLIED)
+            data.delete(REQUEST_FILTER_APPLIED)
+            reqf_result = selector.run_request_filters(data)
+          else
+            reqf_result = true
+          end
+
+          reqf_result && selector.run_line_filters(data) do |i|
             yield(i)
             found = true
           end
