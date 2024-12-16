@@ -24,6 +24,7 @@ module SelectRailsLog
       prev_time = nil
       prev_data = nil
       found = false
+      stop_iteration = false
 
       @io.each_line do |line|
         m = LOG_REGEXP.match(line)
@@ -51,6 +52,10 @@ module SelectRailsLog
 
         if /\AStarted (?<http_method>\S+) "(?<path>[^"]*)" for (?<client>\S+)/ =~ message
           buff.delete(ident)
+          if stop_iteration
+            prev_data = nil
+            buff.empty? ? break : next
+          end
 
           log[INTERVAL] = 0.0
           prev_time = time
@@ -83,7 +88,12 @@ module SelectRailsLog
           data[RAW_LOGS] << line
 
           data.delete(REQUEST_FILTER_APPLIED)
-          unless selector.run_request_filters(data)
+          begin
+            reqf_result = selector.run_request_filters(data)
+          rescue StopIteration
+            stop_iteration = true
+          end
+          if !reqf_result || stop_iteration
             buff.delete(ident)
             prev_data = nil
           end
