@@ -14,6 +14,7 @@ module SelectRailsLog
     def initialize
       super
       @parser = OptionParser.new
+      @parser.banner += " [logfiles...]"
       @extensions = {}
       @extension_groups = {}
       setup
