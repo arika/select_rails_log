@@ -10,9 +10,10 @@ module SelectRailsLog
         option :output, "--text [PATH]", "Output in text format (default)", default: DEFAULT_OUTPUT
       end
 
-      def initialize(options, fallback_output: nil)
+      def initialize(options, standard_output, fallback_output: nil)
         @fallback_output = fallback_output
-        super(options)
+        @first = true
+        super(options, standard_output)
       end
 
       private
@@ -22,9 +23,11 @@ module SelectRailsLog
       end
 
       def print_data(output, data)
+        output.puts unless @first || output_directory?
+        @first = false if @first
+
         print_header(output, data)
         print_body(output, data)
-        output.puts unless output_directory?
       end
 
       def print_header(output, data)

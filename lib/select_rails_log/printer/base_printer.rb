@@ -18,11 +18,11 @@ module SelectRailsLog
       OUTPUT_FILE_DATETIME_FORMAT = "%Y%m%d-%H%M%S.%6N"
       private_constant :OUTPUT_FILE_DATETIME_FORMAT
 
-      def initialize(...)
-        super
+      def initialize(options, standard_output)
+        super(options)
 
         @common_options = @whole_options[:base_printer]
-        @output_file = $stdout
+        @output_file = @standard_output = standard_output
         @output_filename = @output_directory = nil
         init_output_destination
 
@@ -49,7 +49,7 @@ module SelectRailsLog
       end
 
       def output_stdout?
-        !output_directory? && @output_file == $stdout
+        !output_directory? && @output_file == @standard_output
       end
 
       def output_directory?
