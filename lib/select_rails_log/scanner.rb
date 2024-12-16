@@ -36,10 +36,15 @@ module SelectRailsLog
           next
         end
 
+        begin
+          time = Time.strptime(m[:time], DATETIME_FORMAT)
+        rescue ArgumentError
+          # ignore invalid time format
+        end
+
         pid = m[:pid]
         reqid = m[:reqid]
         message = m[:message]
-        time = Time.strptime(m[:time], DATETIME_FORMAT)
         log = {
           TIME => time,
           MESSAGE => message,
@@ -78,7 +83,7 @@ module SelectRailsLog
         next unless data
 
         message.gsub!(ANSI_ESCAPE_SEQ_REGEXP, "")
-        log[INTERVAL] = time - prev_time
+        log[INTERVAL] = (time && prev_time) ? time - prev_time : 0.0
         prev_time = time
 
         if /\AProcessing by (?<controller>[^\s#]+)#(?<action>\S+)/ =~ message

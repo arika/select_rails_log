@@ -36,7 +36,7 @@ module SelectRailsLog
       end
 
       def strftime(time)
-        time.strftime(DATETIME_FORMAT)
+        time&.strftime(DATETIME_FORMAT)
       end
     end
   end

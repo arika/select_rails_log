@@ -31,8 +31,8 @@ module SelectRailsLog
       end
 
       def print_header(output, data)
-        output.puts "time: #{data[STARTED].strftime(DATETIME_FORMAT)} " \
-                    ".. #{data[COMPLETED].strftime(DATETIME_FORMAT)}"
+        output.puts "time: #{data[STARTED]&.strftime(DATETIME_FORMAT)} " \
+                    ".. #{data[COMPLETED]&.strftime(DATETIME_FORMAT)}"
         output.puts "request_id: #{data[REQUEST_ID]}" if data[REQUEST_ID]
         output.print <<~END_OF_HEADER
           pid: #{data[PID]}
