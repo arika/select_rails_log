@@ -11,6 +11,9 @@ module SelectRailsLog
     ANSI_ESCAPE_SEQ_REGEXP = /\e\[(?:\d{1,2}(?:;\d{1,2})?)?[mK]/
     DEBUG = "DEBUG"
 
+    DATETIME_FORMAT = "%FT%T.%N"
+    private_constant :DATETIME_FORMAT
+
     def initialize(io)
       @io = io
     end
@@ -34,7 +37,7 @@ module SelectRailsLog
         pid = m[:pid]
         reqid = m[:reqid]
         message = m[:message]
-        time = Time.parse(m[:time])
+        time = Time.strptime(m[:time], DATETIME_FORMAT)
         log = {
           TIME => time,
           MESSAGE => message,
