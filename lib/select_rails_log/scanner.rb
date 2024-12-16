@@ -18,11 +18,18 @@ module SelectRailsLog
     def select(selector)
       buff = {}
       prev_time = nil
+      prev_data = nil
       found = false
 
       @io.each_line do |line|
         m = LOG_REGEXP.match(line)
-        next unless m
+        unless m
+          if prev_data && prev_data[LOGS].any?
+            prev_data[LOGS].last[MESSAGE] << "\n" << line.chomp.gsub(ANSI_ESCAPE_SEQ_REGEXP, "")
+            prev_data[RAW_LOGS].last << line
+          end
+          next
+        end
 
         pid = m[:pid]
         reqid = m[:reqid]
@@ -36,7 +43,7 @@ module SelectRailsLog
         }
 
         ident = reqid || pid
-        data = buff[ident] if buff.key?(ident)
+        data = prev_data = buff[ident] if buff.key?(ident)
 
         if /\AStarted (?<http_method>\S+) "(?<path>[^"]*)" for (?<client>\S+)/ =~ message
           buff.delete(ident)
@@ -89,6 +96,7 @@ module SelectRailsLog
             found = true
           end
           buff.delete(ident)
+          prev_data = nil
         else
           data[LOGS] << log
           data[RAW_LOGS] << line

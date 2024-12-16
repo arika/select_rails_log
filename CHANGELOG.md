@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.2.1] - 2024-12-16
+
+- Multline log support
+
 ## [0.2.0] - 2024-12-15
 
 - Multiple printer support
