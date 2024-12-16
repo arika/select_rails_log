@@ -1,0 +1,37 @@
+I, [2024-12-15T22:44:45.515274 #48158]  INFO -- : [5989416a-5d9a-49b1-92e5-54ef00e0e38c] Started GET "/login" for 127.0.0.1 at 2024-12-15 22:44:45 +0900
+I, [2024-12-15T22:44:45.524606 #48158]  INFO -- : [88a6d51e-f6cd-4969-bdc9-f2cebdfbea98] Started GET "/login" for 127.0.0.1 at 2024-12-15 22:47:41 +0900
+I, [2024-12-15T22:44:45.527507 #48158]  INFO -- : [5989416a-5d9a-49b1-92e5-54ef00e0e38c] Processing by SessionsController#new as HTML
+D, [2024-12-15T22:44:45.529178 #48158] DEBUG -- : [5989416a-5d9a-49b1-92e5-54ef00e0e38c]   Rendering layout layouts/application.html.erb
+D, [2024-12-15T22:44:45.529352 #48158] DEBUG -- : [5989416a-5d9a-49b1-92e5-54ef00e0e38c]   Rendering sessions/new.html.erb within layouts/application
+I, [2024-12-15T22:44:45.531982 #48158]  INFO -- : [5989416a-5d9a-49b1-92e5-54ef00e0e38c]   Rendered sessions/new.html.erb within layouts/application (Duration: 2.4ms | Allocations: 916)
+I, [2024-12-15T22:44:45.537028 #48158]  INFO -- : [88a6d51e-f6cd-4969-bdc9-f2cebdfbea98] Processing by SessionsController#new as HTML
+D, [2024-12-15T22:44:45.538888 #48158] DEBUG -- : [88a6d51e-f6cd-4969-bdc9-f2cebdfbea98]   Rendering layout layouts/application.html.erb
+D, [2024-12-15T22:44:45.539073 #48158] DEBUG -- : [88a6d51e-f6cd-4969-bdc9-f2cebdfbea98]   Rendering sessions/new.html.erb within layouts/application
+I, [2024-12-15T22:44:45.541556 #48158]  INFO -- : [88a6d51e-f6cd-4969-bdc9-f2cebdfbea98]   Rendered sessions/new.html.erb within layouts/application (Duration: 2.3ms | Allocations: 940)
+D, [2024-12-15T22:44:45.543449 #48158] DEBUG -- : [5989416a-5d9a-49b1-92e5-54ef00e0e38c]   Rendered layouts/_header.html.erb (Duration: 0.2ms | Allocations: 130)
+D, [2024-12-15T22:44:45.543657 #48158] DEBUG -- : [5989416a-5d9a-49b1-92e5-54ef00e0e38c]   Rendered layouts/_footer.html.erb (Duration: 0.1ms | Allocations: 62)
+I, [2024-12-15T22:44:45.543991 #48158]  INFO -- : [5989416a-5d9a-49b1-92e5-54ef00e0e38c]   Rendered layout layouts/application.html.erb (Duration: 14.7ms | Allocations: 7953)
+I, [2024-12-15T22:44:45.544224 #48158]  INFO -- : [5989416a-5d9a-49b1-92e5-54ef00e0e38c] Completed 200 OK in 17ms (Views: 15.5ms | ActiveRecord: 0.0ms | Allocations: 8231)
+
+I, [2024-12-15T22:44:45.545524 #48158]  INFO -- : [06df5c81-c6dc-48f2-957c-7550a854ad00] Started POST "/login" for 127.0.0.1 at 2024-12-15 22:47:47 +0900
+
+D, [2024-12-15T22:44:45.549328 #48158] DEBUG -- : [88a6d51e-f6cd-4969-bdc9-f2cebdfbea98]   Rendered layouts/_header.html.erb (Duration: 0.2ms | Allocations: 130)
+D, [2024-12-15T22:44:45.549528 #48158] DEBUG -- : [88a6d51e-f6cd-4969-bdc9-f2cebdfbea98]   Rendered layouts/_footer.html.erb (Duration: 0.1ms | Allocations: 62)
+I, [2024-12-15T22:44:45.549890 #48158]  INFO -- : [88a6d51e-f6cd-4969-bdc9-f2cebdfbea98]   Rendered layout layouts/application.html.erb (Duration: 10.9ms | Allocations: 7977)
+I, [2024-12-15T22:44:45.550128 #48158]  INFO -- : [88a6d51e-f6cd-4969-bdc9-f2cebdfbea98] Completed 200 OK in 13ms (Views: 11.7ms | ActiveRecord: 0.0ms | Allocations: 8254)
+
+
+I, [2024-12-15T22:44:45.555889 #48158]  INFO -- : [06df5c81-c6dc-48f2-957c-7550a854ad00] Processing by SessionsController#create as TURBO_STREAM
+I, [2024-12-15T22:44:45.556005 #48158]  INFO -- : [06df5c81-c6dc-48f2-957c-7550a854ad00]   Parameters: {"authenticity_token"=>"[FILTERED]", "session"=>{"email"=>"foo@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+D, [2024-12-15T22:44:45.558760 #48158] DEBUG -- : [06df5c81-c6dc-48f2-957c-7550a854ad00]   [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "foo@example.com"], ["LIMIT", 1]]
+D, [2024-12-15T22:44:45.559555 #48158] DEBUG -- : [06df5c81-c6dc-48f2-957c-7550a854ad00]   ↳ app/controllers/sessions_controller.rb:7:in `create'
+D, [2024-12-15T22:44:46.025025 #48158] DEBUG -- : [06df5c81-c6dc-48f2-957c-7550a854ad00]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+D, [2024-12-15T22:44:46.025365 #48158] DEBUG -- : [06df5c81-c6dc-48f2-957c-7550a854ad00]   ↳ app/models/user.rb:37:in `remember'
+D, [2024-12-15T22:44:46.025875 #48158] DEBUG -- : [06df5c81-c6dc-48f2-957c-7550a854ad00]   [1m[36mUser Update (0.4ms)[0m  [1m[33mUPDATE "users" SET "remember_digest" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["remember_digest", "$2a$12$HyrAOJpjdaSMuBEyyy2Ta.2Qvf4st48i2xZbrDMCQsfWfMUCknQVa"], ["updated_at", "2024-12-15 13:47:48.379553"], ["id", 1]]
+D, [2024-12-15T22:44:46.026053 #48158] DEBUG -- : [06df5c81-c6dc-48f2-957c-7550a854ad00]   ↳ app/models/user.rb:37:in `remember'
+D, [2024-12-15T22:44:46.026892 #48158] DEBUG -- : [06df5c81-c6dc-48f2-957c-7550a854ad00]   [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+D, [2024-12-15T22:44:46.027171 #48158] DEBUG -- : [06df5c81-c6dc-48f2-957c-7550a854ad00]   ↳ app/models/user.rb:37:in `remember'
+I, [2024-12-15T22:44:46.027377 #48158]  INFO -- : [06df5c81-c6dc-48f2-957c-7550a854ad00] Redirected to http://127.0.0.1:3000/users/1
+I, [2024-12-15T22:44:46.027436 #48158]  INFO -- : [06df5c81-c6dc-48f2-957c-7550a854ad00] Completed 302 Found in 471ms (ActiveRecord: 1.4ms | Allocations: 3056)
+
+

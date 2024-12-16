@@ -1,0 +1,195 @@
+I, [2024-12-15T22:40:07.689566 #48158]  INFO -- : [2ffd7a51-489c-4892-9fec-9dd6172f69e2] Started GET "/login" for 127.0.0.1 at 2024-12-15 22:40:07 +0900
+I, [2024-12-15T22:40:07.702238 #48158]  INFO -- : [2ffd7a51-489c-4892-9fec-9dd6172f69e2] Processing by SessionsController#new as HTML
+D, [2024-12-15T22:40:07.705488 #48158] DEBUG -- : [2ffd7a51-489c-4892-9fec-9dd6172f69e2]   Rendering layout layouts/application.html.erb
+D, [2024-12-15T22:40:07.705666 #48158] DEBUG -- : [2ffd7a51-489c-4892-9fec-9dd6172f69e2]   Rendering sessions/new.html.erb within layouts/application
+I, [2024-12-15T22:40:07.718367 #48158]  INFO -- : [2ffd7a51-489c-4892-9fec-9dd6172f69e2]   Rendered sessions/new.html.erb within layouts/application (Duration: 12.6ms | Allocations: 2136)
+D, [2024-12-15T22:40:07.725138 #48158] DEBUG -- : [2ffd7a51-489c-4892-9fec-9dd6172f69e2]   Rendered layouts/_header.html.erb (Duration: 0.2ms | Allocations: 145)
+D, [2024-12-15T22:40:07.725344 #48158] DEBUG -- : [2ffd7a51-489c-4892-9fec-9dd6172f69e2]   Rendered layouts/_footer.html.erb (Duration: 0.1ms | Allocations: 67)
+I, [2024-12-15T22:40:07.725894 #48158]  INFO -- : [2ffd7a51-489c-4892-9fec-9dd6172f69e2]   Rendered layout layouts/application.html.erb (Duration: 20.3ms | Allocations: 9302)
+I, [2024-12-15T22:40:07.726132 #48158]  INFO -- : [2ffd7a51-489c-4892-9fec-9dd6172f69e2] Completed 200 OK in 24ms (Views: 21.9ms | ActiveRecord: 0.0ms | Allocations: 9931)
+
+
+I, [2024-12-15T22:40:16.522651 #48159]  INFO -- : [64cb3ea6-fa8a-4a60-98f9-97ca9c1f7ede] Started POST "/login" for 127.0.0.1 at 2024-12-15 22:40:16 +0900
+I, [2024-12-15T22:40:16.536476 #48159]  INFO -- : [64cb3ea6-fa8a-4a60-98f9-97ca9c1f7ede] Processing by SessionsController#create as TURBO_STREAM
+I, [2024-12-15T22:40:16.536586 #48159]  INFO -- : [64cb3ea6-fa8a-4a60-98f9-97ca9c1f7ede]   Parameters: {"authenticity_token"=>"[FILTERED]", "session"=>{"email"=>"test@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+D, [2024-12-15T22:40:16.538702 #48159] DEBUG -- : [64cb3ea6-fa8a-4a60-98f9-97ca9c1f7ede]   [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+D, [2024-12-15T22:40:16.539002 #48159] DEBUG -- : [64cb3ea6-fa8a-4a60-98f9-97ca9c1f7ede]   ↳ app/controllers/sessions_controller.rb:7:in `create'
+D, [2024-12-15T22:40:17.002213 #48159] DEBUG -- : [64cb3ea6-fa8a-4a60-98f9-97ca9c1f7ede]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+D, [2024-12-15T22:40:17.002610 #48159] DEBUG -- : [64cb3ea6-fa8a-4a60-98f9-97ca9c1f7ede]   ↳ app/models/user.rb:37:in `remember'
+D, [2024-12-15T22:40:17.003215 #48159] DEBUG -- : [64cb3ea6-fa8a-4a60-98f9-97ca9c1f7ede]   [1m[36mUser Update (0.5ms)[0m  [1m[33mUPDATE "users" SET "remember_digest" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["remember_digest", "$2a$12$iySfvbJ9stqQLAREtHJVLOcif0cnm8SRNEXQ0yIS3Hj8Hxygi0VrK"], ["updated_at", "2024-12-15 13:40:17.001717"], ["id", 1]]
+D, [2024-12-15T22:40:17.003393 #48159] DEBUG -- : [64cb3ea6-fa8a-4a60-98f9-97ca9c1f7ede]   ↳ app/models/user.rb:37:in `remember'
+D, [2024-12-15T22:40:17.004503 #48159] DEBUG -- : [64cb3ea6-fa8a-4a60-98f9-97ca9c1f7ede]   [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mcommit transaction[0m
+D, [2024-12-15T22:40:17.004651 #48159] DEBUG -- : [64cb3ea6-fa8a-4a60-98f9-97ca9c1f7ede]   ↳ app/models/user.rb:37:in `remember'
+I, [2024-12-15T22:40:17.004953 #48159]  INFO -- : [64cb3ea6-fa8a-4a60-98f9-97ca9c1f7ede] Redirected to http://127.0.0.1:3000/users/1
+I, [2024-12-15T22:40:17.005013 #48159]  INFO -- : [64cb3ea6-fa8a-4a60-98f9-97ca9c1f7ede] Completed 302 Found in 468ms (ActiveRecord: 1.8ms | Allocations: 3301)
+
+
+I, [2024-12-15T22:40:17.009694 #48158]  INFO -- : [d52d405c-01c6-481e-95f7-a48265c7cd16] Started GET "/users/1" for 127.0.0.1 at 2024-12-15 22:40:17 +0900
+I, [2024-12-15T22:40:17.013401 #48158]  INFO -- : [d52d405c-01c6-481e-95f7-a48265c7cd16] Processing by UsersController#show as TURBO_STREAM
+I, [2024-12-15T22:40:17.013422 #48158]  INFO -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   Parameters: {"id"=>"1"}
+D, [2024-12-15T22:40:17.013763 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+D, [2024-12-15T22:40:17.013883 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   ↳ app/controllers/users_controller.rb:12:in `show'
+D, [2024-12-15T22:40:17.014388 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   Rendering layout layouts/application.html.erb
+D, [2024-12-15T22:40:17.014419 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   Rendering users/show.html.erb within layouts/application
+D, [2024-12-15T22:40:17.014937 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   [1m[36mUser Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" INNER JOIN "relationships" ON "users"."id" = "relationships"."followed_id" WHERE "relationships"."follower_id" = ?[0m  [["follower_id", 1]]
+D, [2024-12-15T22:40:17.015091 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   ↳ app/views/shared/_stats.html.erb:5
+D, [2024-12-15T22:40:17.015353 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   [1m[36mUser Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" INNER JOIN "relationships" ON "users"."id" = "relationships"."follower_id" WHERE "relationships"."followed_id" = ?[0m  [["followed_id", 1]]
+D, [2024-12-15T22:40:17.015493 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   ↳ app/views/shared/_stats.html.erb:11
+D, [2024-12-15T22:40:17.015534 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   Rendered shared/_stats.html.erb (Duration: 1.0ms | Allocations: 1924)
+D, [2024-12-15T22:40:17.015731 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+D, [2024-12-15T22:40:17.015854 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:40:17.015956 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+D, [2024-12-15T22:40:17.016075 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:40:17.016127 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   Rendered users/_follow_form.html.erb (Duration: 0.2ms | Allocations: 518)
+D, [2024-12-15T22:40:17.016308 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   [1m[36mMicropost Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "microposts" WHERE "microposts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+D, [2024-12-15T22:40:17.016448 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   ↳ app/views/users/show.html.erb:16
+D, [2024-12-15T22:40:17.016590 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   [1m[36mMicropost Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "microposts" WHERE "microposts"."user_id" = ?[0m  [["user_id", 1]]
+D, [2024-12-15T22:40:17.016722 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   ↳ app/views/users/show.html.erb:17
+D, [2024-12-15T22:40:17.016858 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   [1m[36mMicropost Load (0.0ms)[0m  [1m[34mSELECT "microposts".* FROM "microposts" WHERE "microposts"."user_id" = ? ORDER BY "microposts"."created_at" DESC LIMIT ? OFFSET ?[0m  [["user_id", 1], ["LIMIT", 30], ["OFFSET", 0]]
+D, [2024-12-15T22:40:17.017004 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   ↳ app/views/users/show.html.erb:19
+D, [2024-12-15T22:40:17.017437 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   [1m[36mActiveStorage::Attachment Load (0.0ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "Micropost"], ["name", "image"], ["LIMIT", 1]]
+D, [2024-12-15T22:40:17.017602 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   ↳ app/views/microposts/_micropost.html.erb:6
+D, [2024-12-15T22:40:17.017818 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   [1m[36mActiveStorage::Blob Load (0.0ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+D, [2024-12-15T22:40:17.017960 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   ↳ app/views/microposts/_micropost.html.erb:7
+D, [2024-12-15T22:40:17.018317 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+D, [2024-12-15T22:40:17.018438 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:40:17.018769 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   [1m[36mActiveStorage::Attachment Load (0.0ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 3], ["record_type", "Micropost"], ["name", "image"], ["LIMIT", 1]]
+D, [2024-12-15T22:40:17.018971 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   ↳ app/views/microposts/_micropost.html.erb:6
+D, [2024-12-15T22:40:17.019151 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+D, [2024-12-15T22:40:17.020937 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:40:17.021518 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   [1m[36mActiveStorage::Attachment Load (0.0ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 2], ["record_type", "Micropost"], ["name", "image"], ["LIMIT", 1]]
+D, [2024-12-15T22:40:17.021697 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   ↳ app/views/microposts/_micropost.html.erb:6
+D, [2024-12-15T22:40:17.021871 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+D, [2024-12-15T22:40:17.021984 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:40:17.022303 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   [1m[36mActiveStorage::Attachment Load (0.0ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "Micropost"], ["name", "image"], ["LIMIT", 1]]
+D, [2024-12-15T22:40:17.022454 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   ↳ app/views/microposts/_micropost.html.erb:6
+D, [2024-12-15T22:40:17.022568 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+D, [2024-12-15T22:40:17.022952 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:40:17.023033 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   Rendered collection of microposts/_micropost.html.erb [4 times] (Duration: 5.9ms | Allocations: 7820)
+I, [2024-12-15T22:40:17.023079 #48158]  INFO -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   Rendered users/show.html.erb within layouts/application (Duration: 8.6ms | Allocations: 13360)
+D, [2024-12-15T22:40:17.026074 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+D, [2024-12-15T22:40:17.026197 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:40:17.026282 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+D, [2024-12-15T22:40:17.026386 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:40:17.026471 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+D, [2024-12-15T22:40:17.026583 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:40:17.026651 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   Rendered layouts/_header.html.erb (Duration: 0.7ms | Allocations: 1745)
+D, [2024-12-15T22:40:17.026721 #48158] DEBUG -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 62)
+I, [2024-12-15T22:40:17.026945 #48158]  INFO -- : [d52d405c-01c6-481e-95f7-a48265c7cd16]   Rendered layout layouts/application.html.erb (Duration: 12.4ms | Allocations: 22139)
+I, [2024-12-15T22:40:17.027046 #48158]  INFO -- : [d52d405c-01c6-481e-95f7-a48265c7cd16] Completed 200 OK in 14ms (Views: 12.4ms | ActiveRecord: 0.4ms | Allocations: 23176)
+
+
+I, [2024-12-15T22:40:56.912283 #48158]  INFO -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a] Started GET "/" for 127.0.0.1 at 2024-12-15 22:40:56 +0900
+I, [2024-12-15T22:40:56.927104 #48158]  INFO -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a] Processing by StaticPagesController#home as HTML
+D, [2024-12-15T22:40:56.929658 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+D, [2024-12-15T22:40:56.930201 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:40:56.930601 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+D, [2024-12-15T22:40:56.930912 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:40:56.932475 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+D, [2024-12-15T22:40:56.941038 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:40:56.941880 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   Rendering layout layouts/application.html.erb
+D, [2024-12-15T22:40:56.941950 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   Rendering static_pages/home.html.erb within layouts/application
+D, [2024-12-15T22:40:56.942176 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+D, [2024-12-15T22:40:56.942487 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:40:56.942738 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+D, [2024-12-15T22:40:56.943022 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:40:56.943282 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+D, [2024-12-15T22:40:56.943556 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:40:56.943886 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+D, [2024-12-15T22:40:56.944168 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:40:56.944332 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+D, [2024-12-15T22:40:56.944614 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:40:56.944820 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+D, [2024-12-15T22:40:56.945096 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:40:56.946387 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   [1m[36mMicropost Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "microposts" WHERE "microposts"."user_id" = ?[0m  [["user_id", 2]]
+D, [2024-12-15T22:40:56.946688 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   ↳ app/views/shared/_user_info.html.erb:4
+D, [2024-12-15T22:40:56.946835 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   Rendered shared/_user_info.html.erb (Duration: 4.2ms | Allocations: 3399)
+D, [2024-12-15T22:40:56.947016 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+D, [2024-12-15T22:40:56.947284 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:40:56.948512 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   [1m[36mUser Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" INNER JOIN "relationships" ON "users"."id" = "relationships"."followed_id" WHERE "relationships"."follower_id" = ?[0m  [["follower_id", 2]]
+D, [2024-12-15T22:40:56.948817 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   ↳ app/views/shared/_stats.html.erb:5
+D, [2024-12-15T22:40:56.949355 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   [1m[36mUser Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" INNER JOIN "relationships" ON "users"."id" = "relationships"."follower_id" WHERE "relationships"."followed_id" = ?[0m  [["followed_id", 2]]
+D, [2024-12-15T22:40:56.949613 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   ↳ app/views/shared/_stats.html.erb:11
+D, [2024-12-15T22:40:56.949676 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   Rendered shared/_stats.html.erb (Duration: 2.8ms | Allocations: 2422)
+D, [2024-12-15T22:40:56.950359 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   Rendered shared/_error_messages.html.erb (Duration: 0.0ms | Allocations: 13)
+D, [2024-12-15T22:40:56.950954 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   Rendered shared/_micropost_form.html.erb (Duration: 0.8ms | Allocations: 507)
+D, [2024-12-15T22:40:56.951351 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   [1m[36mMicropost Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "microposts" WHERE (user_id IN (SELECT followed_id FROM relationships
+                     WHERE  follower_id = 2)
+                     OR user_id = 2)[0m
+D, [2024-12-15T22:40:56.951635 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   ↳ app/views/shared/_feed.html.erb:1
+D, [2024-12-15T22:40:56.951690 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   Rendered shared/_feed.html.erb (Duration: 0.7ms | Allocations: 734)
+I, [2024-12-15T22:40:56.951744 #48158]  INFO -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   Rendered static_pages/home.html.erb within layouts/application (Duration: 9.7ms | Allocations: 7823)
+D, [2024-12-15T22:40:56.958177 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+D, [2024-12-15T22:40:56.958475 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:40:56.958711 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+D, [2024-12-15T22:40:56.958929 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:40:56.959172 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+D, [2024-12-15T22:40:56.959423 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:40:56.959613 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   Rendered layouts/_header.html.erb (Duration: 1.7ms | Allocations: 1745)
+D, [2024-12-15T22:40:56.959773 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   Rendered layouts/_footer.html.erb (Duration: 0.1ms | Allocations: 62)
+I, [2024-12-15T22:40:56.959957 #48158]  INFO -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   Rendered layout layouts/application.html.erb (Duration: 18.0ms | Allocations: 16591)
+I, [2024-12-15T22:40:56.960128 #48158]  INFO -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a] Completed 200 OK in 33ms (Views: 17.8ms | ActiveRecord: 0.8ms | Allocations: 18877)
+
+
+I, [2024-12-15T22:41:14.717098 #48158]  INFO -- : [81337fae-ad2f-49d4-b461-c442ee3fea74] Started POST "/microposts" for 127.0.0.1 at 2024-12-15 22:41:14 +0900
+I, [2024-12-15T22:41:14.730057 #48158]  INFO -- : [81337fae-ad2f-49d4-b461-c442ee3fea74] Processing by MicropostsController#create as TURBO_STREAM
+I, [2024-12-15T22:41:14.730204 #48158]  INFO -- : [81337fae-ad2f-49d4-b461-c442ee3fea74]   Parameters: {"authenticity_token"=>"[FILTERED]", "micropost"=>{"content"=>"test"}, "commit"=>"Post"}
+D, [2024-12-15T22:41:14.732332 #48158] DEBUG -- : [81337fae-ad2f-49d4-b461-c442ee3fea74]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+D, [2024-12-15T22:41:14.732827 #48158] DEBUG -- : [81337fae-ad2f-49d4-b461-c442ee3fea74]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:41:14.733221 #48158] DEBUG -- : [81337fae-ad2f-49d4-b461-c442ee3fea74]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+D, [2024-12-15T22:41:14.733505 #48158] DEBUG -- : [81337fae-ad2f-49d4-b461-c442ee3fea74]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:41:14.736567 #48158] DEBUG -- : [81337fae-ad2f-49d4-b461-c442ee3fea74]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+D, [2024-12-15T22:41:14.737392 #48158] DEBUG -- : [81337fae-ad2f-49d4-b461-c442ee3fea74]   ↳ app/controllers/microposts_controller.rb:8:in `create'
+D, [2024-12-15T22:41:14.738591 #48158] DEBUG -- : [81337fae-ad2f-49d4-b461-c442ee3fea74]   [1m[36mMicropost Create (0.7ms)[0m  [1m[32mINSERT INTO "microposts" ("content", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "test"], ["user_id", 2], ["created_at", "2024-12-15 13:41:14.735728"], ["updated_at", "2024-12-15 13:41:14.735728"]]
+D, [2024-12-15T22:41:14.739047 #48158] DEBUG -- : [81337fae-ad2f-49d4-b461-c442ee3fea74]   ↳ app/controllers/microposts_controller.rb:8:in `create'
+D, [2024-12-15T22:41:14.740234 #48158] DEBUG -- : [81337fae-ad2f-49d4-b461-c442ee3fea74]   [1m[36mActiveStorage::Attachment Load (0.0ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 5], ["record_type", "Micropost"], ["name", "image"], ["LIMIT", 1]]
+D, [2024-12-15T22:41:14.740836 #48158] DEBUG -- : [81337fae-ad2f-49d4-b461-c442ee3fea74]   ↳ app/controllers/microposts_controller.rb:8:in `create'
+D, [2024-12-15T22:41:14.743413 #48158] DEBUG -- : [81337fae-ad2f-49d4-b461-c442ee3fea74]   [1m[36mTRANSACTION (2.3ms)[0m  [1m[36mcommit transaction[0m
+D, [2024-12-15T22:41:14.743803 #48158] DEBUG -- : [81337fae-ad2f-49d4-b461-c442ee3fea74]   ↳ app/controllers/microposts_controller.rb:8:in `create'
+I, [2024-12-15T22:41:14.744144 #48158]  INFO -- : [81337fae-ad2f-49d4-b461-c442ee3fea74] Redirected to http://127.0.0.1:3000/
+I, [2024-12-15T22:41:14.744251 #48158]  INFO -- : [81337fae-ad2f-49d4-b461-c442ee3fea74] Completed 302 Found in 14ms (ActiveRecord: 3.4ms | Allocations: 4535)
+
+
+I, [2024-12-15T22:42:12.338460 #48158]  INFO -- : [ccb5e79b-4b2a-479f-be36-df12378358ff] Started POST "/foo_bar/microposts" for 127.0.0.1 at 2024-12-15 22:42:12 +0900
+I, [2024-12-15T22:42:12.356058 #48158]  INFO -- : [ccb5e79b-4b2a-479f-be36-df12378358ff] Processing by FooBar::MicropostsController#create as TURBO_STREAM
+I, [2024-12-15T22:42:12.356270 #48158]  INFO -- : [ccb5e79b-4b2a-479f-be36-df12378358ff]   Parameters: {"authenticity_token"=>"[FILTERED]", "micropost"=>{"content"=>"test", "image"=>#<ActionDispatch::Http::UploadedFile:0x000000010fcf7ff0 @tempfile=#<Tempfile:/var/folders/f6/421s0lfj61q9j6qqr5jqf94m0000gn/T/RackMultipart20241215-48158-k3nygr.png>, @original_filename="test.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"micropost[image]\"; filename=\"test.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Post"}
+D, [2024-12-15T22:42:12.359142 #48158] DEBUG -- : [ccb5e79b-4b2a-479f-be36-df12378358ff]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+D, [2024-12-15T22:42:12.359772 #48158] DEBUG -- : [ccb5e79b-4b2a-479f-be36-df12378358ff]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:42:12.360460 #48158] DEBUG -- : [ccb5e79b-4b2a-479f-be36-df12378358ff]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+D, [2024-12-15T22:42:12.360845 #48158] DEBUG -- : [ccb5e79b-4b2a-479f-be36-df12378358ff]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:42:12.365472 #48158] DEBUG -- : [ccb5e79b-4b2a-479f-be36-df12378358ff]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+D, [2024-12-15T22:42:12.366078 #48158] DEBUG -- : [ccb5e79b-4b2a-479f-be36-df12378358ff]   ↳ app/controllers/microposts_controller.rb:8:in `create'
+D, [2024-12-15T22:42:12.366881 #48158] DEBUG -- : [ccb5e79b-4b2a-479f-be36-df12378358ff]   [1m[36mMicropost Create (0.5ms)[0m  [1m[32mINSERT INTO "microposts" ("content", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "test"], ["user_id", 3], ["created_at", "2024-12-15 13:42:12.365099"], ["updated_at", "2024-12-15 13:42:12.365099"]]
+D, [2024-12-15T22:42:12.367194 #48158] DEBUG -- : [ccb5e79b-4b2a-479f-be36-df12378358ff]   ↳ app/controllers/microposts_controller.rb:8:in `create'
+D, [2024-12-15T22:42:12.368020 #48158] DEBUG -- : [ccb5e79b-4b2a-479f-be36-df12378358ff]   [1m[36mActiveStorage::Attachment Load (0.0ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 6], ["record_type", "Micropost"], ["name", "image"], ["LIMIT", 1]]
+D, [2024-12-15T22:42:12.368483 #48158] DEBUG -- : [ccb5e79b-4b2a-479f-be36-df12378358ff]   ↳ app/controllers/microposts_controller.rb:8:in `create'
+D, [2024-12-15T22:42:12.369326 #48158] DEBUG -- : [ccb5e79b-4b2a-479f-be36-df12378358ff]   [1m[36mActiveStorage::Blob Create (0.1ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["key", "2ltgm4razby533wdwuobypom21id"], ["filename", "test.png"], ["content_type", "image/png"], ["metadata", "{\"identified\":true}"], ["service_name", "local"], ["byte_size", 182668], ["checksum", "DUq54mfmvHiW6boXhcwRQg=="], ["created_at", "2024-12-15 13:42:12.368851"]]
+D, [2024-12-15T22:42:12.369906 #48158] DEBUG -- : [ccb5e79b-4b2a-479f-be36-df12378358ff]   ↳ app/controllers/microposts_controller.rb:8:in `create'
+D, [2024-12-15T22:42:12.370331 #48158] DEBUG -- : [ccb5e79b-4b2a-479f-be36-df12378358ff]   [1m[36mActiveStorage::Attachment Create (0.1ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "image"], ["record_type", "Micropost"], ["record_id", 6], ["blob_id", 3], ["created_at", "2024-12-15 13:42:12.370026"]]
+D, [2024-12-15T22:42:12.370857 #48158] DEBUG -- : [ccb5e79b-4b2a-479f-be36-df12378358ff]   ↳ app/controllers/microposts_controller.rb:8:in `create'
+D, [2024-12-15T22:42:12.371683 #48158] DEBUG -- : [ccb5e79b-4b2a-479f-be36-df12378358ff]   [1m[36mMicropost Update (0.1ms)[0m  [1m[33mUPDATE "microposts" SET "updated_at" = ? WHERE "microposts"."id" = ?[0m  [["updated_at", "2024-12-15 13:42:12.371010"], ["id", 6]]
+D, [2024-12-15T22:42:12.372086 #48158] DEBUG -- : [ccb5e79b-4b2a-479f-be36-df12378358ff]   ↳ app/controllers/microposts_controller.rb:8:in `create'
+D, [2024-12-15T22:42:12.372894 #48158] DEBUG -- : [ccb5e79b-4b2a-479f-be36-df12378358ff]   [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+D, [2024-12-15T22:42:12.373212 #48158] DEBUG -- : [ccb5e79b-4b2a-479f-be36-df12378358ff]   ↳ app/controllers/microposts_controller.rb:8:in `create'
+I, [2024-12-15T22:42:12.374812 #48158]  INFO -- : [ccb5e79b-4b2a-479f-be36-df12378358ff] [36m  Disk Storage (1.3ms) [0m[32mUploaded file to key: 2ltgm4razby533wdwuobypom21id (checksum: DUq54mfmvHiW6boXhcwRQg==)[0m
+I, [2024-12-15T22:42:12.375777 #48158]  INFO -- : [ccb5e79b-4b2a-479f-be36-df12378358ff] [ActiveJob] Enqueued ActiveStorage::AnalyzeJob (Job ID: 71415104-0495-40d9-acec-9ee7e4959afb) to Async(default) with arguments: #<GlobalID:0x000000010fd1a758 @uri=#<URI::GID gid://sample-app/ActiveStorage::Blob/3>>
+I, [2024-12-15T22:42:12.376457 #48158]  INFO -- : [ccb5e79b-4b2a-479f-be36-df12378358ff] Redirected to http://127.0.0.1:3000/
+I, [2024-12-15T22:42:12.376636 #48158]  INFO -- : [ccb5e79b-4b2a-479f-be36-df12378358ff] Completed 302 Found in 20ms (ActiveRecord: 1.8ms | Allocations: 8385)
+
+
+I, [2024-12-15T22:42:22.232758 #48158]  INFO -- : [52ac2db0-7e6c-4ff6-8dd7-52f0644af397] Started DELETE "/logout" for 127.0.0.1 at 2024-12-15 22:42:22 +0900
+I, [2024-12-15T22:42:22.246467 #48158]  INFO -- : [52ac2db0-7e6c-4ff6-8dd7-52f0644af397] Processing by SessionsController#destroy as TURBO_STREAM
+D, [2024-12-15T22:42:22.250020 #48158] DEBUG -- : [52ac2db0-7e6c-4ff6-8dd7-52f0644af397]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+D, [2024-12-15T22:42:22.250584 #48158] DEBUG -- : [52ac2db0-7e6c-4ff6-8dd7-52f0644af397]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:42:22.251052 #48158] DEBUG -- : [52ac2db0-7e6c-4ff6-8dd7-52f0644af397]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+D, [2024-12-15T22:42:22.251378 #48158] DEBUG -- : [52ac2db0-7e6c-4ff6-8dd7-52f0644af397]   ↳ app/helpers/sessions_helper.rb:21:in `current_user'
+D, [2024-12-15T22:42:22.252907 #48158] DEBUG -- : [52ac2db0-7e6c-4ff6-8dd7-52f0644af397]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+D, [2024-12-15T22:42:22.253532 #48158] DEBUG -- : [52ac2db0-7e6c-4ff6-8dd7-52f0644af397]   ↳ app/models/user.rb:56:in `forget'
+D, [2024-12-15T22:42:22.255280 #48158] DEBUG -- : [52ac2db0-7e6c-4ff6-8dd7-52f0644af397]   [1m[36mUser Update (1.2ms)[0m  [1m[33mUPDATE "users" SET "updated_at" = ?, "remember_digest" = ? WHERE "users"."id" = ?[0m  [["updated_at", "2024-12-15 13:42:22.251914"], ["remember_digest", nil], ["id", 3]]
+D, [2024-12-15T22:42:22.256004 #48158] DEBUG -- : [52ac2db0-7e6c-4ff6-8dd7-52f0644af397]   ↳ app/models/user.rb:56:in `forget'
+D, [2024-12-15T22:42:22.258098 #48158] DEBUG -- : [52ac2db0-7e6c-4ff6-8dd7-52f0644af397]   [1m[36mTRANSACTION (1.6ms)[0m  [1m[36mcommit transaction[0m
+D, [2024-12-15T22:42:22.258514 #48158] DEBUG -- : [52ac2db0-7e6c-4ff6-8dd7-52f0644af397]   ↳ app/models/user.rb:56:in `forget'
+I, [2024-12-15T22:42:22.259001 #48158]  INFO -- : [52ac2db0-7e6c-4ff6-8dd7-52f0644af397] Redirected to http://127.0.0.1:3000/
+I, [2024-12-15T22:42:22.259118 #48158]  INFO -- : [52ac2db0-7e6c-4ff6-8dd7-52f0644af397] Completed 303 See Other in 12ms (ActiveRecord: 3.2ms | Allocations: 3344)
+
+
