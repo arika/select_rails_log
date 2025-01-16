@@ -145,4 +145,39 @@ class ScannerTest < Test::Unit::TestCase
       TEXT
     end
   end
+
+  test "line break" do
+    input = StringIO.new(<<~LOG)
+      I, [2024-12-15T22:40:56.912283 #48158]  INFO -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a] Started POST "/login" for 127.0.0.1 at 2024-12-15 22:40:56 +0900
+      I, [2024-12-15T22:40:56.927104 #48158]  INFO -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a] Processing by SessionsController#create as HTML
+      D, [2024-12-15T22:40:56.941351 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   Micropost Count (0.1ms)  SELECT COUNT(*) FROM "microposts" WHERE (user_id IN (SELECT followed_id FROM relationships
+                           WHERE  follower_id = 2)
+                           OR user_id = 2)
+      D, [2024-12-15T22:40:56.949355 #48158] DEBUG -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a]   User Count (0.1ms)  SELECT COUNT(*) FROM "users" INNER JOIN "relationships" ON "users"."id" = "relationships"."follower_id" WHERE "relationships"."followed_id" = ?  [["followed_id", 2]]
+      D, [2024-12-15T22:40:56.951351 #48158] DEBUG -- : [ActiveJob] [ActionMailer::MailDeliveryJob] [83b21a19-be84-475a-9b21-65b1a514c094] Date: Sun, 15 Dec 2024 22:40:56 +0900
+      From: foo@example.com
+      To: bar@example.com,
+          baz@example.com
+      I, [2024-12-15T22:40:56.960128 #48158]  INFO -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a] Completed 200 OK in 33ms (Views: 17.8ms | ActiveRecord: 0.8ms | Allocations: 18877)
+    LOG
+    output = StringIO.new
+    assert select_rails_log(input:, output:)
+
+    assert_match(
+      Regexp.new(
+        [
+          'Micropost Count (0.1ms)  SELECT COUNT(*) FROM "microposts" ' \
+          "WHERE (user_id IN (SELECT followed_id FROM relationships",
+          "WHERE  follower_id = 2)",
+          "OR user_id = 2)"
+        ].map { Regexp.quote(_1) }.join('\s+')
+      ),
+      output.string
+    )
+
+    assert_not_include output.string, "[ActiveJob]"
+    assert_not_include output.string, "From: foo@example.com"
+    assert_not_include output.string, "To: bar@example.com"
+    assert_not_include output.string, "baz@example.com"
+  end
 end

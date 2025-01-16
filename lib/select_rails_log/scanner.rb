@@ -80,7 +80,11 @@ module SelectRailsLog
           buff[ident] = data
           next
         end
-        next unless data
+
+        unless data
+          prev_data = nil
+          next
+        end
 
         message.gsub!(ANSI_ESCAPE_SEQ_REGEXP, "")
         log[INTERVAL] = (time && prev_time) ? time - prev_time : 0.0
