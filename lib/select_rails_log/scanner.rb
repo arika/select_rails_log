@@ -9,11 +9,10 @@ module SelectRailsLog
     reqid_regexp = /\[(?<reqid>\h{8}-\h{4}-\h{4}-\h{4}-\h{12})\]/
     LOG_REGEXP = /\A., \[(?<time>\S+) #(?<pid>\d+)\]  *(?<severity>\S+) -- :(?: #{reqid_regexp})? (?<message>.*)/
     ANSI_ESCAPE_SEQ_REGEXP = /\e\[(?:\d{1,2}(?:;\d{1,2})?)?[mK]/
-    DEBUG = "DEBUG"
 
     DATETIME_FORMAT = "%FT%T.%N"
     REQUEST_FILTER_APPLIED = "request_filter_applied" # internal data keys
-    private_constant :DATETIME_FORMAT, :DEBUG, :REQUEST_FILTER_APPLIED
+    private_constant :DATETIME_FORMAT, :REQUEST_FILTER_APPLIED
 
     def initialize(io)
       @io = io
@@ -48,8 +47,7 @@ module SelectRailsLog
         log = {
           TIME => time,
           MESSAGE => message,
-          SEVERITY => m[:severity],
-          SEVERITY_DEBUG => m[:severity] == DEBUG
+          SEVERITY => m[:severity]
         }
 
         ident = reqid || pid

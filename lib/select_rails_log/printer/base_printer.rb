@@ -101,7 +101,7 @@ module SelectRailsLog
 
       def each_log_with_index(data)
         data[LOGS].each_with_index do |log, i|
-          next if @common_options[:exclude_debug_logs] && log[SEVERITY_DEBUG]
+          next if @common_options[:exclude_debug_logs] && log[SEVERITY] == DEBUG
 
           yield(log, i)
         end

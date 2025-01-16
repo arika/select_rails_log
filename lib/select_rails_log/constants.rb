@@ -6,6 +6,8 @@ module SelectRailsLog
   module Constants
     DEFAULT_OUTPUT = Object.new
 
+    DEBUG = "DEBUG"
+
     # data keys
     ACTION = "action"
     CLIENT = "client"
@@ -28,7 +30,6 @@ module SelectRailsLog
     REQUEST_ID = "request_id"
     RAW_LOGS = "raw_logs"
     SEVERITY = "severity"
-    SEVERITY_DEBUG = "severity_debug"
     STARTED = "started"
     TIME = "time"
   end
