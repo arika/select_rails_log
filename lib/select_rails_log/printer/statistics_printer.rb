@@ -27,9 +27,8 @@ module SelectRailsLog
       def initialize(*)
         super
 
-        @stats_data = (options[:stats_targets] || DEFAULT_TARGETS).each_with_object({}) do |target, hash|
-          hash[target] = []
-        end
+        @stats_data = {}
+        @stats_targets = options[:stats_targets] || DEFAULT_TARGETS
       end
 
       def close
@@ -46,27 +45,34 @@ module SelectRailsLog
         raise CommandLineOptionError, "output to directory is not supported for statistics"
       end
 
-      def print_data(_output, data)
-        @stats_data.each_key do |key|
-          if key == STAT_TOTAL_DURATION
-            push_value(key, data[DURATION])
-          else
-            push_value(key, data[PERFORMANCE][key])
-          end
+      def build_stat_data
+        @stats_targets.each_with_object({}) do |target, hash|
+          hash[target] = []
         end
       end
 
-      def push_value(key, value)
-        @stats_data[key] << value if value
+      def print_data(_output, data)
+        stat_data = @stats_data[data.values_at(CONTROLLER, ACTION)] ||= build_stat_data
+        stat_data.each do |target, values|
+          value = if target == STAT_TOTAL_DURATION
+                    data[DURATION]
+                  else
+                    data[PERFORMANCE][target]
+                  end
+          values << value if value
+        end
       end
 
       def print_statistics
-        print_row ["", *PERCENTILES.map { |percentile| "p#{percentile}" }]
+        print_row ["percentile", *PERCENTILES]
 
-        @stats_data.each do |key, values|
-          next if values.empty?
+        @stats_data.keys.sort.each do |(controller, action)|
+          @stats_data[[controller, action]].each do |target, values|
+            next if values.empty?
 
-          print_row [key, *PERCENTILES.map { |percentile| values.percentile(percentile) }]
+            print_row ["#{controller}##{action} #{target}",
+                       *PERCENTILES.map { |percentile| values.percentile(percentile) }]
+          end
         end
       end
 
