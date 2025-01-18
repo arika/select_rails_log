@@ -1,14 +1,34 @@
-# SelectRailsLog
+# select_rails_log
+
+select_rails_log is a tool for extracting request logs from Rails log files.
+
+It can be used during development to identify bottlenecks in the application or for small-scale benchmarking.
+
+The following extraction criteria can be specified:
+
+* Request ID
+* Controller name and action name
+* HTTP method and status code
+* Request date and time range
+* Response time range
+* String matching
+
+The extracted logs can be formatted and output in the following formats:
+
+* Text
+* JSON, JSONL
+* TSV
+* Raw log
+
+Additionally, the tool can aggregate and output metrics such as response times for the extracted requests:
+
+* Percentiles by controller and action
+* Box plots by controller and action
+* Histograms for the overall extraction results
 
 ## Installation
 
-Install the gem and add to the application's Gemfile by executing:
-
-```bash
-bundle add select_rails_log
-```
-
-If bundler is not being used to manage dependencies, install the gem by executing:
+Install the gem by executing:
 
 ```bash
 gem install select_rails_log
@@ -16,23 +36,43 @@ gem install select_rails_log
 
 ## Usage
 
-At first, add the following to an appropriate configuration file in the environments directory.
+select_rails_log can process logs that include timestamps and Request-IDs.
 
-``` ruby
+To enable this, first configure the appropriate settings file, such as `config/environments/development.rb`, as follows:
+
+```ruby
 config.log_tags = [:request_id]
 config.log_formatter = ::Logger::Formatter.new
 ```
 
-Start the application and perform various operations until sufficient output is written to the log file.
-Then you can use the following command to select the log file.
-
-```console
-$ select_rails_log path/to/rails.log
-```
-
 ### Sample session
 
-TODO
+Here are some usage examples.
+
+To output a box plot for an overview, use the following command:
+
+```bash
+select_rails_log log/development.log --boxplot
+```
+
+The result will be output as follows:
+
+![boxplot](images/boxplot.png)
+
+Next, let’s examine the response time distribution for ActiveStorage::Representations::RedirectController#show, which had significant variance:
+
+```bash
+select_rails_log log/development.log -A 'ActiveStorage::Representations::RedirectController#show' --histgram
+```
+![histgram](images/histgram.png)
+
+Finally, let’s take a closer look at requests that took particularly long, specifically those over 400ms:
+
+```bash
+select_rails_log log/development.log -A 'ActiveStorage::Representations::RedirectController#show' -D 400..
+```
+
+![text](images/text.png)
 
 ## Development
 
