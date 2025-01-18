@@ -1,9 +1,12 @@
 ## [Unreleased]
 
-## [0.2.1] - 2024-12-16
+## [0.2.1] - 2025-01-18
 
 - Multline log support
 - Bug fix
+- Refine stats
+- Refectoring
+- Add tests
 
 ## [0.2.0] - 2024-12-15
 

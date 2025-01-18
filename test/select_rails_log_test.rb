@@ -54,4 +54,7 @@ class SelectRailsLogTest < Test::Unit::TestCase
       ].map { File.read("#{dir}/output/#{_1}.txt") }.join("\n")
     end
   end
+
+  test "multiple output" do
+  end
 end
