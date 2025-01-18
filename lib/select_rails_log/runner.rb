@@ -88,7 +88,8 @@ module SelectRailsLog
       selector, printers = setup
       counter_thread = counter_thread() if output_tty?(printers)
 
-      scanner.select(selector) do |data|
+      keep_raw = include_raw_printer?(printers)
+      scanner.select(selector, keep_raw:) do |data|
         @count += 1
         printers.each { _1.print(data) }
       end
@@ -128,6 +129,10 @@ module SelectRailsLog
 
     def default_printer
       Printer::TextPrinter.new(@whole_options, @standard_output, fallback_output: DEFAULT_OUTPUT)
+    end
+
+    def include_raw_printer?(printers)
+      printers.any? { _1.is_a?(Printer::RawPrinter) }
     end
 
     def counter_thread

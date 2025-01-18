@@ -18,7 +18,7 @@ module SelectRailsLog
       @io = io
     end
 
-    def select(selector)
+    def select(selector, keep_raw: true)
       buff = {}
       prev_time = nil
       prev_data = nil
@@ -30,7 +30,7 @@ module SelectRailsLog
         unless m
           if prev_data && prev_data[LOGS].any?
             prev_data[LOGS].last[MESSAGE] << "\n" << line.chomp.gsub(ANSI_ESCAPE_SEQ_REGEXP, "")
-            prev_data[RAW_LOGS].last << line
+            prev_data[RAW_LOGS].last << line if keep_raw
           end
           next
         end
@@ -72,9 +72,9 @@ module SelectRailsLog
             PATH => path,
             CLIENT => client,
             LOGS => [log],
-            RAW_LOGS => [line],
             REQUEST_FILTER_APPLIED => false
           }
+          data[RAW_LOGS] = [line] if keep_raw
           buff[ident] = data
           next
         end
@@ -92,7 +92,7 @@ module SelectRailsLog
           data[CONTROLLER] = controller
           data[ACTION] = action
           data[LOGS] << log
-          data[RAW_LOGS] << line
+          data[RAW_LOGS] << line if keep_raw
 
           data.delete(REQUEST_FILTER_APPLIED)
           begin
@@ -107,7 +107,7 @@ module SelectRailsLog
         elsif /\A  Parameters: (?<params>.*)/ =~ message
           data[PARAMETERS] = params
           data[LOGS] << log
-          data[RAW_LOGS] << line
+          data[RAW_LOGS] << line if keep_raw
         elsif /\ACompleted (?<http_status>\d+) .* in (?<duration>\d+)ms \((?<durations>.*)\)/ =~ message
           data[HTTP_STATUS] = http_status
           data[DURATION] = duration.to_i
@@ -115,7 +115,7 @@ module SelectRailsLog
                                        .to_h { |type, dur, dur_f| [type, dur_f ? dur.to_f : dur.to_i] }
           data[COMPLETED] = time
           data[LOGS] << log
-          data[RAW_LOGS] << line
+          data[RAW_LOGS] << line if keep_raw
 
           if data.key?(REQUEST_FILTER_APPLIED)
             data.delete(REQUEST_FILTER_APPLIED)
@@ -132,7 +132,7 @@ module SelectRailsLog
           prev_data = nil
         else
           data[LOGS] << log
-          data[RAW_LOGS] << line
+          data[RAW_LOGS] << line if keep_raw
         end
       end
 
