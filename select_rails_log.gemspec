@@ -8,13 +8,11 @@ Gem::Specification.new do |spec|
   spec.authors = ["akira yamada"]
   spec.email = ["akira@arika.org"]
 
-  spec.summary = "select Rails log"
-  spec.description = "select Rails log"
+  spec.summary = "Rails log selector"
+  spec.description = "select_rails_log is a tool for extracting request logs from Rails log files."
   spec.homepage = "https://github.com/arika/select_rails_log"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.1.0"
-
-  spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/arika/select_rails_log"
