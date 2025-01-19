@@ -1,26 +1,36 @@
 # select_rails_log
 
-select_rails_log is a tool for extracting request logs from Rails log files.
+select_rails_log is a tool for parsing Rails log files and extracting request logs based on a variety of criteria.
+These criteria include controller/action names, request date and time, response duration, and more.
 
-It can be used during development to identify bottlenecks in the application or for small-scale benchmarking.
+The tool allows you to output the extracted logs in various formats and provides summary metrics such as percentiles and histograms.
+It is particularly useful during development for identifying application bottlenecks or conducting small-scale benchmarking.
 
-The following extraction criteria can be specified:
+## Features
 
-* Request ID
+### Extraction Criteria
+
+You can specify the following criteria to extract request logs:
+
+* Request-ID
 * Controller name and action name
 * HTTP method and status code
-* Request date and time range
+* Date and time range of the request
 * Response time range
-* String matching
+* String matching within logs
 
-The extracted logs can be formatted and output in the following formats:
+### Output Formats
+
+Extracted logs can be output in the following formats:
 
 * Text
 * JSON, JSONL
 * TSV
 * Raw log
 
-Additionally, the tool can aggregate and output metrics such as response times for the extracted requests:
+Summarization Options
+
+The tool supports the following summarization features:
 
 * Percentiles by controller and action
 * Box plots by controller and action

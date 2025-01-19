@@ -8,8 +8,9 @@ Gem::Specification.new do |spec|
   spec.authors = ["akira yamada"]
   spec.email = ["akira@arika.org"]
 
-  spec.summary = "Rails log selector"
-  spec.description = "select_rails_log is a tool for extracting request logs from Rails log files."
+  spec.summary = "A tool for extracting, formatting, and analyzing Rails logs"
+  spec.description = "A command-line tool for extracting, formatting, and analyzing Rails request logs " \
+                     "to identify performance bottlenecks and gain insights."
   spec.homepage = "https://github.com/arika/select_rails_log"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.1.0"
