@@ -1,5 +1,7 @@
 ## [Unreleased]
 
+- Ignore other tags on scanning logs
+
 ## [0.2.0] - 2025-01-18
 
 - Multiple printer support

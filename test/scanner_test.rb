@@ -180,4 +180,18 @@ class ScannerTest < Test::Unit::TestCase
     assert_not_include output.string, "To: bar@example.com"
     assert_not_include output.string, "baz@example.com"
   end
+
+  test "ignore other tag" do
+    input = StringIO.new(<<~LOG)
+      I, [2024-12-15T22:40:56.912283 #48158]  INFO -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a] [abc] Started POST "/login" for 127.0.0.1 at 2024-12-15 22:40:56 +0900
+      I, [2024-12-15T22:40:56.927104 #48158]  INFO -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a] [abc] [def] Processing by SessionsController#create as HTML
+      I, [2024-12-15T22:40:56.960128 #48158]  INFO -- : [86b2f5b4-206b-4798-bf9e-3952ef87ec9a] Completed 200 OK in 33ms (Views: 17.8ms | ActiveRecord: 0.8ms | Allocations: 18877)
+    LOG
+    output = StringIO.new
+    assert select_rails_log(input:, output:)
+
+    assert_includes output.string, <<~TEXT
+      request_id: 86b2f5b4-206b-4798-bf9e-3952ef87ec9a
+    TEXT
+  end
 end

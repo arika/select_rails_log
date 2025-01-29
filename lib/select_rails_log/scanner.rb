@@ -53,7 +53,7 @@ module SelectRailsLog
         ident = reqid || pid
         data = prev_data = buff[ident] if buff.key?(ident)
 
-        if /\AStarted (?<http_method>\S+) "(?<path>[^"]*)" for (?<client>\S+)/ =~ message
+        if /\A(?:\[.*\] )?Started (?<http_method>\S+) "(?<path>[^"]*)" for (?<client>\S+)/ =~ message
           buff.delete(ident)
           if stop_iteration
             prev_data = nil
@@ -88,7 +88,7 @@ module SelectRailsLog
         log[INTERVAL] = (time && prev_time) ? time - prev_time : 0.0
         prev_time = time
 
-        if /\AProcessing by (?<controller>[^\s#]+)#(?<action>\S+)/ =~ message
+        if /\A(?:\[.*\] )?Processing by (?<controller>[^\s#]+)#(?<action>\S+)/ =~ message
           data[CONTROLLER] = controller
           data[ACTION] = action
           data[LOGS] << log
@@ -104,11 +104,11 @@ module SelectRailsLog
             buff.delete(ident)
             prev_data = nil
           end
-        elsif /\A  Parameters: (?<params>.*)/ =~ message
+        elsif /\A(?:\[.*\] )?  Parameters: (?<params>.*)/ =~ message
           data[PARAMETERS] = params
           data[LOGS] << log
           data[RAW_LOGS] << line if keep_raw
-        elsif /\ACompleted (?<http_status>\d+) .* in (?<duration>\d+)ms \((?<durations>.*)\)/ =~ message
+        elsif /\A(?:\[.*\] )?Completed (?<http_status>\d+) .* in (?<duration>\d+)ms \((?<durations>.*)\)/ =~ message
           data[HTTP_STATUS] = http_status
           data[DURATION] = duration.to_i
           data[PERFORMANCE] = durations.scan(/(\S+): (\d+(\.\d+)?)/)
