@@ -1,5 +1,7 @@
 ## [Unreleased]
 
+## [0.2.1] - 2025-01-29
+
 - Ignore other tags on scanning logs
 
 ## [0.2.0] - 2025-01-18
